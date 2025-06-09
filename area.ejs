@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calcular Áreas</title>
+        <link rel="stylesheet" href="/css/style.css" />
+    </head>
+    <body>
+        <main>
+            <div class="form-container">
+                <h2>Calcula el Área</h2>
+                <form action="/calcular" method="POST">
+                    <select name="figura" id="figura" onchange="mostrarInputs()">
+                        <option value="">Selecciona Figura</option>
+                        <option value="cuadrado">Cuadrado</option>
+                        <option value="triangulo">Triángulo</option>
+                        <option value="pentagono">Pentágono</option> 
+                    </select>
+                    <div id="inputs"></div>
+                    <button type="submit">Calcular Área y Perímetro</button>
+                </form>
+                <% if (typeof resultado!== 'undefined' ) { %>
+                <div class="result">Área: <%= resultado.area %> 
+                    Perímetro: <%= resultado.perimetro %></div>
+                    <% } %>
+            </div>
+            <script>
+                 function mostrarInputs() {
+                        const figura = document.getElementById("figura").value;
+                        const contenedor = document.getElementById("inputs");
+                        contenedor.innerHTML = "";
+
+                        if (figura === "cuadrado") {
+                        contenedor.innerHTML = `
+                        <input type="number" name="lado" placeholder="Lado" required />
+                        `;
+                        } else if (figura === "triangulo") {
+                        contenedor.innerHTML = `
+                        <input type="number" name="base" placeholder="Base" required />
+                        <input type="number" name="altura" placeholder="Altura" required />
+                        <input type="number" name="lado" placeholder="Lado (para perímetro)" required />
+                        `;
+                        } else if (figura === "pentagono") {
+                        contenedor.innerHTML = `
+                        <input type="number" name="base" placeholder="Base" required />
+                        <input type="number" name="apotema" placeholder="Apotema" required />
+                        <input type="number" name="lado" placeholder="Lado (para perímetro)" required />
+                        `;
+                        }
+                    }
+            </script>
+        </main>
+    </body>
+</html>
